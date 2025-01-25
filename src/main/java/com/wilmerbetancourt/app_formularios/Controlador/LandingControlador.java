@@ -8,6 +8,6 @@ public class LandingControlador {
 
     @GetMapping("/landing")
     public String holaMundo(){
-        return "pages/lande"
+        return "pages/landing";
     }
 }
