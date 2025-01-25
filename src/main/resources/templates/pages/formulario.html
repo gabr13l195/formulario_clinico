@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css" rel="stylesheet" />
+    <title>Formulario</title>
+</head>
+<body>
+<!--NAVBAR-->
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a th:href="@{/}" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img th:src="@{imagenes/prescripcion-medica.png}" class="h-8"  />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Historial Clinico</span>
+        </a>
+        <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+        </button>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                    <a th:href="@{/}" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+                </li>
+                <li>
+                    <a th:href="@{/formulario}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Formulario</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--FORMULARIO-->
+<div class="container mx-auto p-6">
+    <h2 class="text-2xl font-bold text-center mb-6">Historial Clínico</h2>
+    <form th:action="@{/formulario}" th:object="${historialClinico}" method="post" class="bg-white p-6 shadow-lg rounded-lg">
+        <!-- Nombre del paciente -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{nombre}" type="text" id="nombre" name="nombre"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required />
+            <label for="nombre" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Nombre del paciente</label>
+        </div>
+        <!-- Fecha de nacimiento -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{fechaNacimiento}" type="date" id="fechaNacimiento" name="fechaNacimiento"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required />
+            <label for="fechaNacimiento" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Fecha de nacimiento</label>
+        </div>
+        <!-- Género -->
+        <div class="relative z-0 w-full mb-5 group">
+            <select th:field="*{genero}" id="genero" name="genero"
+                    class="block w-full py-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+            <label for="genero" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Género</label>
+        </div>
+        <!-- Número de teléfono -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{telefono}" type="tel" id="telefono" name="telefono"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required />
+            <label for="telefono" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Número de teléfono</label>
+        </div>
+        <!-- Dirección -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{direccion}" type="text" id="direccion" name="direccion"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required />
+            <label for="direccion" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Dirección</label>
+        </div>
+        <!-- Peso -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{peso}" type="number" step="0.1" id="peso" name="peso"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " />
+            <label for="peso" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Peso (kg)</label>
+        </div>
+        <!-- Altura -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{altura}" type="number" step="0.01" id="altura" name="altura"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " />
+            <label for="altura" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Altura (m)</label>
+        </div>
+        <!-- Alergias -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{alergias}" id="alergias" name="alergias"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="alergias" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Alergias</label>
+        </div>
+        <!-- Enfermedades previas -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{enfermedadesPrevias}" id="enfermedadesPrevias" name="enfermedadesPrevias"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="enfermedadesPrevias" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Enfermedades previas</label>
+        </div>
+        <!-- Medicamentos actuales -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{medicamentos}" id="medicamentos" name="medicamentos"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="medicamentos" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Medicamentos actuales</label>
+        </div>
+        <!-- Cirugías previas -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{cirugias}" id="cirugias" name="cirugias"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="cirugias" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Cirugías previas</label>
+        </div>
+        <!-- Doctor asignado -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{doctorAsignado}" type="text" id="doctorAsignado" name="doctorAsignado"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required />
+            <label for="doctorAsignado" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Doctor asignado</label>
+        </div>
+        <!-- Fecha de consulta -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{fechaConsulta}" type="date" id="fechaConsulta" name="fechaConsulta"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " required />
+            <label for="fechaConsulta" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Fecha de consulta</label>
+        </div>
+        <!-- Motivo de consulta -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{motivoConsulta}" id="motivoConsulta" name="motivoConsulta"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="motivoConsulta" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Motivo de consulta</label>
+        </div>
+        <!-- Diagnóstico -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{diagnostico}" id="diagnostico" name="diagnostico"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="diagnostico" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Diagnóstico</label>
+        </div>
+        <!-- Tratamiento -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{tratamiento}" id="tratamiento" name="tratamiento"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="tratamiento" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Tratamiento</label>
+        </div>
+        <!-- Próxima cita -->
+        <div class="relative z-0 w-full mb-5 group">
+            <input th:field="*{proximaCita}" type="date" id="proximaCita" name="proximaCita"
+                   class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                   placeholder=" " />
+            <label for="proximaCita" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Próxima cita</label>
+        </div>
+        <!-- Observaciones -->
+        <div class="relative z-0 w-full mb-5 group">
+                <textarea th:field="*{observaciones}" id="observaciones" name="observaciones"
+                          class="block py-3 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                          placeholder=" "></textarea>
+            <label for="observaciones" class="absolute text-sm text-gray-500 transform -translate-y-6 scale-75 top-4 -z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6">Observaciones</label>
+        </div>
+        <!-- Botón para enviar -->
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Guardar historial</button>
+    </form>
+</div>
+</body>
+</html>
